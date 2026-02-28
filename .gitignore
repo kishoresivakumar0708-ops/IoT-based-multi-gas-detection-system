@@ -16,5 +16,5 @@ build/
 libraries/
 
 # Data
-mq2_data.csv
+# mq2_data.csv (Uncomment if you want to push logs)
 *.log

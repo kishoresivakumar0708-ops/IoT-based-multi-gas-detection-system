@@ -9,7 +9,7 @@ file_name = "mq2_data.csv"
 
 # Create file with header if not exists
 def initialize_csv():
-    header = ["Date", "Time", "ADC", "Voltage", "Rs", "R0", "Ratio", "PPM"]
+    header = ["Date", "Time", "ADC", "Voltage", "Rs", "R0", "Ratio", "PPM", "Label"]
     if not os.path.exists(file_name):
         with open(file_name, 'w', newline='') as file:
             writer = csv.writer(file)
@@ -31,13 +31,14 @@ def log_data():
         R0 = data.get('R0')
         ratio = data.get('ratio')
         ppm = data.get('ppm')
+        label = data.get('label', 0)
 
         # Log to console for real-time feedback
-        print(f"[{date} {time}] Gas: {ppm:.2f} PPM | Ratio: {ratio:.4f}")
+        print(f"[{date} {time}] Gas: {ppm:.2f} PPM | Label: {label}")
 
         with open(file_name, 'a', newline='') as file:
             writer = csv.writer(file)
-            writer.writerow([date, time, adc, voltage, Rs, R0, ratio, ppm])
+            writer.writerow([date, time, adc, voltage, Rs, R0, ratio, ppm, label])
 
         return jsonify({"status": "success"}), 200
     except Exception as e:
