@@ -18,10 +18,11 @@ const char* serverUrl = "http://192.168.1.5:5000/log";
 #define ADC_MAX 4095.0
 #define VCC 3.3
 
-// ====== CALIBRATED R0 VALUES (UPDATE LATER) ======
-float R0_MQ2   = 11660.0;
-float R0_MQ135 = 12000.0;  // placeholder
-float R0_MQ7   = 11000.0;  // placeholder
+// ====== OVERNIGHT CALIBRATED R0 VALUES ======
+// Derived from 8-hour continuous clean-air mapping (Top 10% average Rs / Datasheet ratio)
+float R0_MQ2   = 25770.0;
+float R0_MQ135 = 10582.0;
+float R0_MQ7   = 27584.0;
 
 // ====== MODEL CONSTANTS ======
 #define M_SLOPE -0.47

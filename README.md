@@ -50,4 +50,4 @@ This allows automatic recalibration during clean-air conditions.
 
 ---
 License: MIT
-Repository: [SnO2-Gas-Analytics](https://github.com/yourusername/SnO2-Gas-Analytics)
+Repository: [SnO2-Gas-Analytics](https://github.com/aashishniranjanb/SnO2-Gas-Analytics)

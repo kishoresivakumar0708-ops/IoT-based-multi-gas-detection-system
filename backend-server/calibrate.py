@@ -5,7 +5,7 @@ import numpy as np
 filename = "multi_sensor_data.csv"
 
 try:
-    df = pd.read_csv(filename)
+    df = pd.read_csv(filename, encoding='utf-8')
     # Filter for baseline run where label is 0 (clean air)
     df_clean = df[df['label'] == 0]
     
@@ -31,7 +31,7 @@ try:
         # Calculate R0 based on the clean air ratio from the datasheet
         r0 = avg_rs / ratio
         
-        print(f"[{sensor_name}] Top 10% Avg Rs: {avg_rs:.2f} Ω -> R0: {r0:.2f} Ω")
+        print(f"[{sensor_name}] Top 10% Avg Rs: {avg_rs:.2f} Ohms -> R0: {r0:.2f} Ohms")
         return r0
 
     print("================ CALIBRATION RESULTS ================")
