@@ -6,6 +6,12 @@
 const char* ssid = "Airtel_Barathy";
 const char* password = "6384@bank";
 
+// ================= CLOUD DASHBOARD =================
+// Set this to the IP of the machine running app.py
+// Find it via: python -c "import socket; print(socket.gethostbyname(socket.gethostname()))"
+const char* CLOUD_SERVER = "http://192.168.1.5:5000/log";
+bool cloudEnabled = true;
+
 // ================= PINS =================
 #define MQ2_PIN   35
 #define MQ135_PIN 34
@@ -39,7 +45,9 @@ void setup() {
         delay(500);
         Serial.print(".");
     }
-    Serial.println("\nWiFi Connected! TinyML Ready.");
+    Serial.println("\nWiFi Connected! TinyML + Cloud Ready.");
+    Serial.print("Cloud Dashboard: ");
+    Serial.println(CLOUD_SERVER);
 }
 
 // ================= HELPERS =================
@@ -58,6 +66,39 @@ float getStd(int sensorIdx, float mean) {
     return sqrt(sumSq / (count - 1));
 }
 
+// ================= CLOUD LOGGING =================
+void sendToCloud(float r2, float r135, float r7,
+                 float ppm2, float ppm135, float ppm7,
+                 int prediction) {
+    if (!cloudEnabled || WiFi.status() != WL_CONNECTED) return;
+
+    HTTPClient http;
+    http.begin(CLOUD_SERVER);
+    http.addHeader("Content-Type", "application/json");
+
+    // Build JSON payload
+    String json = "{";
+    json += "\"mq2_ratio\":" + String(r2, 4) + ",";
+    json += "\"mq135_ratio\":" + String(r135, 4) + ",";
+    json += "\"mq7_ratio\":" + String(r7, 4) + ",";
+    json += "\"mq2_ppm\":" + String(ppm2, 2) + ",";
+    json += "\"mq135_ppm\":" + String(ppm135, 2) + ",";
+    json += "\"mq7_ppm\":" + String(ppm7, 2) + ",";
+    json += "\"prediction\":" + String(prediction);
+    json += "}";
+
+    int httpCode = http.POST(json);
+    if (httpCode == 200) {
+        String response = http.getString();
+        Serial.print("[CLOUD] OK -> ");
+        Serial.println(response);
+    } else {
+        Serial.print("[CLOUD] Error: ");
+        Serial.println(httpCode);
+    }
+    http.end();
+}
+
 // ================= MAIN LOOP =================
 void loop() {
     // 1. Read Raw Sensors
@@ -70,7 +111,12 @@ void loop() {
     float r135 = ((VCC - v135) * RL / v135) / R0_MQ135;
     float r7 = ((VCC - v7) * RL / v7) / R0_MQ7;
 
-    // 3. Update Circular Buffer
+    // 3. Approximate PPM (for display only)
+    float ppm2 = pow(10, 2.0 - r2 / 3.5);
+    float ppm135 = pow(10, 1.5 - r135 / 2.0);
+    float ppm7 = pow(10, 2.5 - r7 / 5.0);
+
+    // 4. Update Circular Buffer
     history[bufferIdx][0] = r2;
     history[bufferIdx][1] = r135;
     history[bufferIdx][2] = r7;
@@ -80,7 +126,7 @@ void loop() {
         bufferFull = true;
     }
 
-    // 4. Feature Engineering (Match Python!)
+    // 5. Feature Engineering (Match Python!)
     float m2 = getMean(0), m135 = getMean(1), m7 = getMean(2);
     float s2 = getStd(0, m2), s135 = getStd(1, m135), s7 = getStd(2, m7);
 
@@ -91,10 +137,10 @@ void loop() {
         r2 * r7, r2 * r135
     };
 
-    // 5. Run TinyML Inference
+    // 6. Run TinyML Inference (Edge)
     int prediction = model.predict(features);
 
-    // 6. Display Result
+    // 7. Display Result
     Serial.println("---------------------------------");
     Serial.print("AI DECISION: ");
     switch(prediction) {
@@ -107,6 +153,9 @@ void loop() {
     Serial.print("Data: R2:"); Serial.print(r2);
     Serial.print(" | R135:"); Serial.print(r135);
     Serial.print(" | R7:"); Serial.println(r7);
+
+    // 8. Send to Cloud Dashboard
+    sendToCloud(r2, r135, r7, ppm2, ppm135, ppm7, prediction);
 
     delay(2000);
 }
