@@ -18,3 +18,9 @@ libraries/
 # Data
 # mq2_data.csv (Uncomment if you want to push logs)
 *.log
+
+# Environment / IDE
+.venv/
+.vscode/
+.env
+__pycache__/
