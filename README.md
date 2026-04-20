@@ -42,6 +42,23 @@ This allows automatic recalibration during clean-air conditions.
 - 5V heater supply
 - WiFi connectivity
 
+🏁 Getting Started
+
+To get a local copy up and running, follow these simple steps:
+
+1. **Software Prerequisites**:
+   - Python 3.9+
+   - Arduino IDE (for ESP32)
+   - [micromlgen](https://github.com/eloquentarduino/micromlgen) for model export.
+
+2. **Installation**:
+   - Clone the repo: `git clone https://github.com/aashishniranjanb/SnO2-Gas-Analytics.git`
+   - Install backend dependencies: `pip install -r backend-server/requirements.txt`
+   - Flash the ESP32 using the code in `hardware-esp32/esp32_multi_sensor/`.
+3. **Usage**:
+   - Run the server: `python backend-server/server.py`
+   - Monitor live data at `http://localhost:5000`.
+
 📈 Machine Learning Pipeline
 1. Feature normalization
 2. Outlier detection
