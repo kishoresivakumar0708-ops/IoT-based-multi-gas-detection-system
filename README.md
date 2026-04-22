@@ -59,6 +59,26 @@ To get a local copy up and running, follow these simple steps:
    - Run the server: `python backend-server/server.py`
    - Monitor live data at `http://localhost:5000`.
 
+📁 Project Structure
+
+```text
+├── 99/                 # Final High-Accuracy Research (TinyML + Results)
+├── backend-server/      # Flask server, Logging, and ML training scripts
+├── docs/                # Comprehensive technical documentation
+├── hardware-esp32/      # ESP32 Arduino firmware for multi-sensor array
+├── ml-model/            # Legacy model prototypes and artifacts
+└── research/            # Calibration protocols and research notes
+```
+
+📚 Documentation
+
+For deep technical details, please refer to the following guides in the `docs/` folder:
+- [Hardware & Pinout](docs/hardware_bom.md)
+- [Software Setup](docs/setup_guide.md)
+- [TinyML Model Architecture](docs/tinyml_details.md)
+- [Performance Benchmarks](docs/benchmarks.md)
+- [Research Summary (90.9% Accuracy)](99/RESEARCH_SUMMARY.md)
+
 📈 Machine Learning Pipeline
 1. Feature normalization
 2. Outlier detection
