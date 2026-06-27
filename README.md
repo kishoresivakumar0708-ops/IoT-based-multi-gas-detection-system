@@ -1,18 +1,18 @@
-# 🧪 SnO2-Gas-Analytics
+# 🧪 IoT-Based Multi-Gas Detection System
 
-An Adaptive Drift-Compensated Edge-Based Gas Monitoring and Anomaly Detection System built using ESP32 and MQ-2 (SnO₂) semiconductor gas sensor.
+An Adaptive Drift-Compensated Edge-Based Gas Monitoring and Anomaly Detection System built using ESP32 and MQ-series semiconductor gas sensors.
 
 📌 Project Overview
 
-SnO2-Gas-Analytics is an intelligent IoT-based gas monitoring system designed to:
-- Perform real-time gas detection
+This project is an intelligent IoT-based gas monitoring system designed to:
+- Perform real-time multi-gas detection
 - Compensate long-term sensor drift
 - Extract electrical and transient features
-- Run edge-based anomaly detection
+- Run edge-based anomaly detection and machine learning classification
 - Log structured ML-ready datasets
 - Provide real-time monitoring through a mobile app
 
-Unlike traditional MQ-2 projects that only read raw ADC values, this system performs resistance modeling, adaptive baseline correction, and real-time anomaly detection.
+Unlike traditional MQ-sensor projects that only read raw ADC values, this system performs resistance modeling, adaptive baseline correction, and real-time anomaly detection.
 
 🏆 TinyML & Stacked Ensemble Results
 
@@ -45,7 +45,7 @@ This allows automatic recalibration during clean-air conditions.
 
 🛠 Hardware Used
 - ESP32 Dev Module
-- MQ-2 Gas Sensor (SnO₂)
+- MQ-2, MQ-135, and MQ-7 Gas Sensors
 - 5V heater supply
 - WiFi connectivity
 
@@ -94,5 +94,4 @@ For deep technical details, please refer to the following guides in the `docs/` 
 
 ---
 License: MIT
-Repository: [IoT-based-multi-gas-detection-system-](https://github.com/kishoresivakumar0708-ops/IoT-based-multi-gas-detection-system-)
-
+Repository: [IoT-based-multi-gas-detection-system-](https://github.com/kishoresivakumar0708-ops/IoT-based-multi-gas-detection-system)
