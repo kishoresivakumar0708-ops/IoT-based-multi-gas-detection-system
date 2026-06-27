@@ -8,8 +8,8 @@ The backend is built using Python 3.9+. Follow these steps to prepare your serve
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/aashishniranjanb/SnO2-Gas-Analytics.git
-   cd SnO2-Gas-Analytics/backend-server
+   git clone https://github.com/kishoresivakumar0708-ops/IoT-based-multi-gas-detection-system-.git
+   cd IoT-based-multi-gas-detection-system-/backend-server
    ```
 
 2. **Create a Virtual Environment**:

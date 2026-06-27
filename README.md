@@ -52,7 +52,7 @@ To get a local copy up and running, follow these simple steps:
    - [micromlgen](https://github.com/eloquentarduino/micromlgen) for model export.
 
 2. **Installation**:
-   - Clone the repo: `git clone https://github.com/aashishniranjanb/SnO2-Gas-Analytics.git`
+   - Clone the repo: `git clone https://github.com/kishoresivakumar0708-ops/IoT-based-multi-gas-detection-system-.git`
    - Install backend dependencies: `pip install -r backend-server/requirements.txt`
    - Flash the ESP32 using the code in `hardware-esp32/esp32_multi_sensor/`.
 3. **Usage**:
@@ -87,4 +87,5 @@ For deep technical details, please refer to the following guides in the `docs/` 
 
 ---
 License: MIT
-Repository: [SnO2-Gas-Analytics](https://github.com/aashishniranjanb/SnO2-Gas-Analytics)
+Repository: [IoT-based-multi-gas-detection-system-](https://github.com/kishoresivakumar0708-ops/IoT-based-multi-gas-detection-system-)
+
